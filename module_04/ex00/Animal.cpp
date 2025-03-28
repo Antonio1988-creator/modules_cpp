@@ -1,36 +1,33 @@
 #include "Animal.hpp"
 #include <iostream>
 
-Animal::Animal () : type("Unknown") {
-	std::cout << "Animal created!" << std::endl;
+Animal::Animal()
+		: type("Animal") {
+	std::cout << "Animal: Default constructor" << std::endl;
 }
 
-Animal::Animal (std::string type) {
-	this->type = type; 
-	std::cout << "Animal created! It's a " << this->type << std::endl;
-}
-
-Animal::Animal (const Animal& other) {
+Animal::Animal(const Animal& other) {
 	*this = other;
-	std::cout << "Animal is copied!" << std::endl;
-}
 
-Animal& Animal::operator=(const Animal& other) {
-	this->type = other.getType();
-	std::cout << "Animal asigned!" << std::endl;
-	return (*this);
+	std::cout << "Animal: Copy constructor" << std::endl;
 }
 
 Animal::~Animal() {
-	std::cout << "Animal destroyed!" << std::endl;
+	std::cout << "Animal: Destructor" << std::endl;
 }
 
-void	Animal::setType (std::string type){
-	this->type = type;
-	std::cout << "Set type of animal: " << this->type << std::endl;
+Animal& Animal::operator=(const Animal& other){
+	this->type = other.type;
+
+	std::cout << "Animal: Assigment operator" << std::endl;
+
+	return *this;
 }
 
-std::string	getType () const {
-	std::cout "return the type of animal!" << std::endl;
-	return (this->type);
+void	Animal::makeSound() const {
+	std::cout << "\"Animal generic sound\"" << std:endl;
+}
+
+const std::string&	Animal::getType() const {
+	return	this->type;
 }
