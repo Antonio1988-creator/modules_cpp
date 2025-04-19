@@ -14,10 +14,7 @@ CXXFLAGS = -std=c++98 -Wall -Wextra -Werror -MD
 ### SOURCES ###
 
 SRC =	main.cpp		\
-		ClapTrap.cpp	\
-		ScavTrap.cpp	\
-		FragTrap.cpp	\
-		DiamondTrap.cpp	\
+		ClapTrap.cpp
 
 
 OBJ = $(SRC:%.cpp=%.o)
