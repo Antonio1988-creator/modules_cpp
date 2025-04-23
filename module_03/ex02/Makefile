@@ -1,24 +1,37 @@
-CC = c++
-FLAGS = -Wall -Wextra -Werror -std=c++98
+SRC = $(wildcard *.cpp)  # Lista de archivos .cpp en el directorio
+OBJ = $(SRC:.cpp=.o)     # Lista de archivos objeto
+DEP = $(OBJ:.o=.d)       # Lista de archivos de dependencias
 
-NAME = fragtrap
-SRCS = main.cpp ClapTrap.cpp FragTrap.cpp # Añadir FragTrap.cpp
-OBJS = $(SRCS:.cpp=.o)
+NAME = ClapTrap
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -Wshadow -Wno-shadow
+RM = rm -f
 
+# Regla principal
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(FLAGS) $^ -o $@
+# Compilación del ejecutable
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
 
+# Regla para compilar archivos .cpp a .o con generación de dependencias
 %.o: %.cpp
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
 
+# Incluir dependencias generadas automáticamente
+-include $(DEP)
+
+# Limpieza de archivos intermedios
 clean:
-	rm -f $(OBJS)
+	$(RM) $(OBJ) $(DEP)
 
+# Limpieza total incluyendo el ejecutable
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
+# Recompilación completa
 re: fclean all
 
+# Evita conflictos con archivos que se llamen igual que estas reglas
 .PHONY: all clean fclean re
+

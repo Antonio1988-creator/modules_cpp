@@ -1,35 +1,37 @@
-### VARS ###
+SRC = $(wildcard *.cpp)  # Lista de archivos .cpp en el directorio
+OBJ = $(SRC:.cpp=.o)     # Lista de archivos objeto
+DEP = $(OBJ:.o=.d)       # Lista de archivos de dependencias
 
-UNAME_S := $(shell uname -s)
-
-### PROGRAM ###
-
-NAME = out
-
-### COMPILER ###
-
+NAME = ClapTrap
 CXX = c++
-CXXFLAGS = -std=c++98 -Wall -Wextra -Werror -MD
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+RM = rm -f
 
-### SOURCES ###
-
-SRC =	main.cpp		\
-		ClapTrap.cpp
-
-
-OBJ = $(SRC:%.cpp=%.o)
-
-DEP = $(SRC:%.cpp=%.d)
-
-### RULES ###
-
-PHONY := all
+# Regla principal
 all: $(NAME)
 
+# Compilación del ejecutable
 $(NAME): $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
 
-PHONY += sanitize
-ifeq ($(UNAME_S),Linux)
-sanitize: CXXFLAGS += -Wshadow -pedantic -g3 -fsanitize=address -fsanitize=leak -fsanitize=undefined -fsanitize=bounds -fsanitize=null
-endif
+# Regla para compilar archivos .cpp a .o con generación de dependencias
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
+
+# Incluir dependencias generadas automáticamente
+-include $(DEP)
+
+# Limpieza de archivos intermedios
+clean:
+	$(RM) $(OBJ) $(DEP)
+
+# Limpieza total incluyendo el ejecutable
+fclean: clean
+	$(RM) $(NAME)
+
+# Recompilación completa
+re: fclean all
+
+# Evita conflictos con archivos que se llamen igual que estas reglas
+.PHONY: all clean fclean re
+
