@@ -8,7 +8,7 @@ Cat::Cat() : Animal() {
 }
 
 Cat::Cat(const Cat& other) : Animal(other) {
-    brain = new Brain(*other._brain); // Copia profunda
+    _brain = new Brain(*other._brain); // Copia profunda
     std::cout << "Cat copy constructor called!" << std::endl;
 }
 
