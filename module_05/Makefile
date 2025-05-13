@@ -2,7 +2,7 @@ SRC = $(wildcard *.cpp)  # Lista de archivos .cpp en el directorio
 OBJ = $(SRC:.cpp=.o)     # Lista de archivos objeto
 DEP = $(OBJ:.o=.d)       # Lista de archivos de dependencias
 
-NAME = ClapTrap
+NAME = Bureaucrat
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 RM = rm -f
