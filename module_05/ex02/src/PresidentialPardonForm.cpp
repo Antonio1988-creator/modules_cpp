@@ -15,7 +15,7 @@ PresidentialPardonForm::~PresidentialPardonForm() {
 
 PresidentialPardonForm &	PresidentialPardonForm::operator=(PresidentialPardonForm const &rSym) {
 	if (this != &rSym) {
-		// _target is const, cannot reassign
+		AForm::operator=(rSym);
 	}
 	return *this;
 }
@@ -32,9 +32,9 @@ std::ostream &	operator<<(std::ostream & o, PresidentialPardonForm const &rSym) 
 }
 
 void	PresidentialPardonForm::execute(Bureaucrat const &executor) const {
-	if (!this->_signed)
+	if (!this->getSigned())
 		throw AForm::GradeTooLowException();
-	if (executor.getGrade() > this->_executeGrade)
+	if (executor.getGrade() > this->getExecuteGrade())
 		throw AForm::GradeTooLowException();
 	
 	std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;

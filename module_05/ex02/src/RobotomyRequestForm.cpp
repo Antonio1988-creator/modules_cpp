@@ -16,7 +16,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 
 RobotomyRequestForm &	RobotomyRequestForm::operator=(RobotomyRequestForm const &rSym) {
 	if (this != &rSym) {
-		// _target is const, cannot reassign
+		AForm::operator=(rSym);
 	}
 	return *this;
 }
@@ -33,9 +33,9 @@ std::ostream &	operator<<(std::ostream & o, RobotomyRequestForm const &rSym) {
 }
 
 void	RobotomyRequestForm::execute(Bureaucrat const &executor) const {
-	if (!this->_signed)
+	if (!this->getSigned())
 		throw AForm::GradeTooLowException();
-	if (executor.getGrade() > this->_executeGrade)
+	if (executor.getGrade() > this->getExecuteGrade())
 		throw AForm::GradeTooLowException();
 	
 	std::cout << "*bzzzzzzzt* *whirrrr* *click click click*" << std::endl;

@@ -16,7 +16,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 
 RobotomyRequestForm &	RobotomyRequestForm::operator=(RobotomyRequestForm const &rSym) {
 	if (this != &rSym) {
-		// _target is const, cannot reassign
+		AForm::operator=(rSym);
 	}
 	return *this;
 }

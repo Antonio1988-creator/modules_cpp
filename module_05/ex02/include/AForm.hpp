@@ -35,7 +35,7 @@ class AForm {
 			public:
 				virtual const char *	what() const throw();
 		};
-	protected:
+	private:
 		str const	_name;
 		bool		_signed;
 		int const	_signGrade;

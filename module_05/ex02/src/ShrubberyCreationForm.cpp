@@ -15,7 +15,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 
 ShrubberyCreationForm &	ShrubberyCreationForm::operator=(ShrubberyCreationForm const &rSym) {
 	if (this != &rSym) {
-		// _target is const, cannot reassign
+		AForm::operator=(rSym);
 	}
 	return *this;
 }
@@ -32,9 +32,9 @@ std::ostream &	operator<<(std::ostream & o, ShrubberyCreationForm const &rSym) {
 }
 
 void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
-	if (!this->_signed)
+	if (!this->getSigned())
 		throw AForm::GradeTooLowException();
-	if (executor.getGrade() > this->_executeGrade)
+	if (executor.getGrade() > this->getExecuteGrade())
 		throw AForm::GradeTooLowException();
 	
 	str				outfile = this->_target + "_shrubbery";

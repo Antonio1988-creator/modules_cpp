@@ -9,7 +9,7 @@ int main()
         Bureaucrat a("Alice", 42);
         std::cout << a << std::endl;
 
-        Bureaucrat b = a; // copy constructor or assignment
+        Bureaucrat b = a;
         std::cout << "copy: " << b << std::endl;
 
         std::cout << "Promoting Alice..." << std::endl;

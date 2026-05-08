@@ -15,7 +15,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 
 ShrubberyCreationForm &	ShrubberyCreationForm::operator=(ShrubberyCreationForm const &rSym) {
 	if (this != &rSym) {
-		// _target is const, cannot reassign
+		AForm::operator=(rSym);
 	}
 	return *this;
 }
