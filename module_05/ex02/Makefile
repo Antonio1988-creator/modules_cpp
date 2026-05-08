@@ -1,31 +1,35 @@
-SRCDIR = src
-INCDIR = include
+NAME		= bureaucrat
+CXX			= c++
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+INCLUDES	= -I./include
 
-SRC = $(wildcard $(SRCDIR)/*.cpp)
-OBJ = $(SRC:.cpp=.o)
-DEP = $(OBJ:.o=.d)
+SRC_DIR		= ./src
+OBJ_DIR		= ./obj
+DEP_DIR		= ./obj
 
-NAME = bureaucrat
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -I$(INCDIR)
-RM = rm -f
+SOURCES		= Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp \
+			  RobotomyRequestForm.cpp PresidentialPardonForm.cpp main.cpp
+OBJECTS		= $(SOURCES:.cpp=.o)
+OBJ			= $(addprefix $(OBJ_DIR)/, $(OBJECTS))
+DEP			= $(addprefix $(DEP_DIR)/, $(OBJECTS:.o=.d))
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
-
--include $(DEP)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -MMD -MP -c $< -o $@
 
 clean:
-	$(RM) $(OBJ) $(DEP)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
+
+-include $(DEP)
 
 .PHONY: all clean fclean re
