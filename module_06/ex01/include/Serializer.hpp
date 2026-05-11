@@ -3,6 +3,12 @@
 
 #include "Data.hpp"
 #include <cstdint>
+#include <stdint.h> // fallback for older compilers/environments
+
+// Provide a fallback typedef for uintptr_t if the platform doesn't define it
+#ifndef UINTPTR_MAX
+typedef unsigned long uintptr_t;
+#endif
 
 class Serializer {
 	public:

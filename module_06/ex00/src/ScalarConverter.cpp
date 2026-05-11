@@ -30,19 +30,19 @@ static bool isPseudoLiteral(const std::string &s) {
 
 static bool isCharLiteral(const std::string &s) {
 	if (s.length() == 1 && std::isprint(static_cast<unsigned char>(s[0])) && !std::isdigit(s[0])) return true;
-	if (s.length() == 3 && s.front() == '\'' && s.back() == '\'' && std::isprint(static_cast<unsigned char>(s[1]))) return true;
+	if (s.length() == 3 && s[0] == '\'' && s[s.size() - 1] == '\'' && std::isprint(static_cast<unsigned char>(s[1]))) return true;
 	return false;
 }
 
 static bool parseToDouble(const std::string &input, double &out) {
 	if (input.empty()) return false;
 	std::string t = input;
-	if ((t.back() == 'f' || t.back() == 'F') && t.size() > 1) t = t.substr(0, t.size() - 1);
+	if ((t[t.size() - 1] == 'f' || t[t.size() - 1] == 'F') && t.size() > 1) t = t.substr(0, t.size() - 1);
 	std::istringstream iss(t);
 	iss >> out;
 	if (iss.fail()) return false;
 	char c;
-	if (iss >> c) return false; // extra garbage
+	if (iss >> c) return false;
 	return true;
 }
 
