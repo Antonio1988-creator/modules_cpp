@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anguil-l <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/26 18:12:13 by anguil-l          #+#    #+#             */
+/*   Updated: 2025/04/26 18:12:24 by anguil-l         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(str name, int grade) : _name(name) {
-	std::cout << "[constructor] Bureaucrat base constructor called." << std::endl;
 	if (grade < 1)
 		throw Bureaucrat::GradeTooHighException();
 	else if (grade > 150)
@@ -13,16 +24,13 @@ Bureaucrat::Bureaucrat(str name, int grade) : _name(name) {
 Bureaucrat::Bureaucrat()
 	: _name("default"), _grade(150)
 {
-	std::cout << "[constructor] Bureaucrat default constructor called." << std::endl;
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat const &src) : _name(src.getName()) {
-	std::cout << "[constructor] Bureaucrat copy constructor called." << std::endl;
 	*this = src;
 }
 
 Bureaucrat::~Bureaucrat() {
-	std::cout << "[destructor] Bureaucrat default destructor called." << std::endl;
 }
 
 Bureaucrat &	Bureaucrat::operator=(Bureaucrat const &rSym) {

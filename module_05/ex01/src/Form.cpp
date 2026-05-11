@@ -1,7 +1,6 @@
 #include "../include/Form.hpp"
 
 Form::Form(str name, int signGrade, int executeGrade) : _name(name), _signed(false), _signGrade(signGrade), _executeGrade(executeGrade) {
-	std::cout << "[constructor] Form base constructor called." << std::endl;
 	if (signGrade < 1 || executeGrade < 1)
 		throw Form::GradeTooHighException();
 	else if (signGrade > 150 || executeGrade > 150)
@@ -9,16 +8,13 @@ Form::Form(str name, int signGrade, int executeGrade) : _name(name), _signed(fal
 }
 
 Form::Form() : _name("default"), _signed(false), _signGrade(150), _executeGrade(150) {
-	std::cout << "[constructor] Form default constructor called." << std::endl;
 }
 
 Form::Form(Form const &src) : _name(src.getName()), _signGrade(src.getSignGrade()), _executeGrade(src.getExecuteGrade()) {
-	std::cout << "[constructor] Form copy constructor called." << std::endl;
 	*this = src;
 }
 
 Form::~Form() {
-	std::cout << "[destructor] Form default destructor called." << std::endl;
 }
 
 Form &	Form::operator=(Form const &rSym) {
