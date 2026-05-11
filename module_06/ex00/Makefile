@@ -23,6 +23,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 
 clean:
 	rm -rf $(OBJ_DIR)
+	# Remove any stray object or dependency files that might have been generated in src/
+	find $(SRC_DIR) -name "*.o" -type f -delete || true
+	find $(SRC_DIR) -name "*.d" -type f -delete || true
+	# Also remove any stray .o/.d at project root (defensive)
+	find . -maxdepth 1 -name "*.o" -type f -delete || true
+	find . -maxdepth 1 -name "*.d" -type f -delete || true
 
 fclean: clean
 	rm -f $(NAME) converter
