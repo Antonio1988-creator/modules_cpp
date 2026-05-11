@@ -2,10 +2,9 @@
 #define _SERIALIZER_HPP_
 
 #include "Data.hpp"
-#include <cstdint>
-#include <stdint.h> // fallback for older compilers/environments
+#include <stdint.h>
 
-// Provide a fallback typedef for uintptr_t if the platform doesn't define it
+/* C++98: ensure uintptr_t exists; if not, provide a conservative fallback. */
 #ifndef UINTPTR_MAX
 typedef unsigned long uintptr_t;
 #endif
