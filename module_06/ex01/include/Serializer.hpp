@@ -4,10 +4,6 @@
 #include "Data.hpp"
 #include <stdint.h>
 
-/* C++98: ensure uintptr_t exists; if not, provide a conservative fallback. */
-#ifndef UINTPTR_MAX
-typedef unsigned long uintptr_t;
-#endif
 
 class Serializer {
 	public:
