@@ -69,10 +69,8 @@ int main() {
 	std::cout << "\n--- Test 5: 10,000 numbers with addRange (vector) ---" << std::endl;
 	try {
 		Span sp5 = Span(10001);
-		std::vector<int> numbers;
-		for (int i = 0; i < 10000; ++i)
-			numbers.push_back(i);
-		sp5.addRange(numbers.begin(), numbers.end());
+		// Use convenience addRange(start, end, step) to add 0..9999
+		sp5.addRange(0, 10000, 1); // adds 10000 elements (end exclusive)
 		sp5.addNumber(10000);
 		std::cout << "Shortest span (10k numbers): " << sp5.shortestSpan() << std::endl;
 		std::cout << "Longest span (10k numbers): " << sp5.longestSpan() << std::endl;
@@ -85,10 +83,8 @@ int main() {
 	std::cout << "\n--- Test 6: 20,000 numbers with addRange (list) ---" << std::endl;
 	try {
 		Span sp6 = Span(20001);
-		std::list<int> list_numbers;
-		for (int i = 0; i < 20000; ++i)
-			list_numbers.push_back(i * 2);
-		sp6.addRange(list_numbers.begin(), list_numbers.end());
+		// Use convenience addRange(start, end, step) to add 0,2,4,...,39998
+		sp6.addRange(0, 40000, 2); // end is exclusive -> adds 20000 elements
 		sp6.addNumber(40000);
 		std::cout << "Shortest span (20k numbers): " << sp6.shortestSpan() << std::endl;
 		std::cout << "Longest span (20k numbers): " << sp6.longestSpan() << std::endl;

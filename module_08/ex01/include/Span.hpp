@@ -32,8 +32,11 @@ class Span {
 		
 		template<typename Iterator>
 		void	addRange(Iterator begin, Iterator end);
+		// Convenience overload: add numbers from start (inclusive) to end (exclusive)
+		// with given step (like Python range). Example: addRange(0, 10, 2) adds 0,2,4,6,8
+		void	addRange(int start, int end, int step = 1);
 
-		int		shortestSpan();
+		int		shortestSpan() const;
 		int		longestSpan() const;
 
 		class MaxNumbersException : public std::exception {
