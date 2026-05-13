@@ -2,6 +2,7 @@ SRC = $(wildcard ./src/*.cpp)
 NAME = span
 OBJ_DIR = obj
 OBJ = $(patsubst ./src/%.cpp, $(OBJ_DIR)/%.o, $(SRC))
+DEP = $(OBJ:.o=.d)
 
 all: $(NAME)
 
@@ -9,7 +10,9 @@ $(NAME): $(OBJ)
 	c++ -Wall -Wextra -Werror -g -std=c++98 $(OBJ) -o $(NAME)
 
 $(OBJ_DIR)/%.o: ./src/%.cpp | $(OBJ_DIR)
-	c++ -Wall -Wextra -Werror -g -std=c++98 -c $< -o $@
+	c++ -Wall -Wextra -Werror -g -std=c++98 -MMD -MP -c $< -o $@
+
+-include $(DEP)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
